@@ -1,0 +1,84 @@
+﻿@model List<YouTubeApiProject.Models.YouTubeVideoModel>
+
+<div class="search-container">
+    <center>
+        <h2>Search YouTube Videos</h2>
+        <form asp-action="Search" method="post">
+            <input type="text" name="query" placeholder="Search for videos..." />
+            <button type="submit">Search</button>
+            <br /><br />
+        </form>
+    </center>
+</div>
+
+@if (Model != null && Model.Any())
+{
+    <!-- Container with blue background -->
+    <div class="video-container">
+        @foreach (var video in Model)
+        {
+            <div class="video-item">
+                <h3>@video.Title</h3>
+                <p>@video.Description</p>
+                <img src="@video.ThumbnailUrl"
+                     alt="@video.Title"
+                     style="max-width: 100%; height: auto;" />
+                <br />
+                <a href="@video.VideoUrl" target="_blank">
+                    <button type="button">Watch</button> <!-- Watch button -->
+                </a>
+            </div>
+        }
+    </div>
+}
+<!-- CSS styles for container and background -->
+<style>
+    .video-container {
+        background-color: lavender; /* Blue background color */
+        padding: 20px;
+        border-radius: 10px;
+        color: white; /* Optional: White text color to contrast with blue */
+        max-width: 800px;
+        margin: 0 auto; /* Center the container */
+    }
+
+    .video-item {
+        margin-bottom: 20px;
+        padding: 15px;
+        background-color: white; /* Optional: White background for individual video blocks */
+        color: black; /* Black text inside each video block */
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Light shadow for styling */
+    }
+
+    .search-container {
+        background-color: lavenderblush; /* Lavenderblush background color */
+        padding: 10px;
+        border-radius: 10px;
+        max-width: 500px;
+        margin: 0 auto; /* Center the container */
+        text-align: center;
+    }
+
+    /* Optional: Styling for input and button */
+    input[type="text"] {
+        padding: 10px;
+        width: 80%;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    button {
+        background-color: #800080; /* Purple button */
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        button:hover {
+            background-color: #4B0082; /* Darker purple on hover */
+        }
+</style>
+
